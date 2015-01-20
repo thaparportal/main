@@ -1,0 +1,1 @@
+[07-Nov-2014 16:34:45 UTC] PHP Fatal error:  Call to undefined function random_code() in /home/thegodfather/public_html/register/reg.php on line 66

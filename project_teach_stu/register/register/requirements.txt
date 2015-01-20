@@ -1,0 +1,6 @@
+name*
+teacher_code*
+mob no
+email*
+password*
+confirm password*

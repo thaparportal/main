@@ -1,0 +1,95 @@
+.per_form {
+	position: relative;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.per_form:before, 
+.per_form:after { 
+	content: " "; display: table; 
+}
+
+.per_form:after { 
+	clear: both; 
+}
+
+.per_form label {
+	display: block;
+	padding: 40px 5px 5px 2px;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	cursor: pointer;
+}
+
+.per_form input,
+.per_form textarea,
+.per_form select {
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	line-height: 1.5;
+	font-size: 1.4em;
+	padding: 5px 10px;
+	color: #000;
+	display: inline;
+	width: 80%;
+	background-color: transparent;
+}
+.per_form .submit
+{
+	background: #d80;
+	outline-color: invert;
+}
+.per_form input,
+.per_form textarea {
+	border: 3px solid #fff;
+}
+
+.per_form textarea {
+	min-height: 200px;
+}
+
+.per_form input:focus,
+.per_form textarea:focus,
+.per_form label:active + input,
+.per_form label:active + textarea {
+	outline: none;
+	border: 3px solid #10689a;
+}
+
+.per_form select:focus {
+	outline: none;
+}
+
+
+input {
+	background: #10689a;
+	border: none;
+	color: #000;
+	width: auto;
+	cursor: pointer;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 15px 30px;
+	font-size: 1.1em;
+	border-radius: 2px;
+	letter-spacing: 1px;
+}
+
+input:hover {
+	background: #1478b1;
+}
+
+@media screen and (max-width: 70em) {
+	.per-column {
+		width: 50%;
+	}
+	.per-column:nth-child(3) {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 48em) {
+	.per-column {
+		width: 100%;
+		padding: 10px;
+	}
+}
