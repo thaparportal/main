@@ -3,12 +3,21 @@ session_start();
 include_once '../php/connect.php';
 if (isset($_SESSION['teacher_code'])) {
     $tcode  = $_SESSION['teacher_code'];
-    $query  = "select name from `teacher_info` where teacher_code='$tcode'";
+    $query  = "select name,department from `teacher_info` where teacher_code='$tcode'";
     $result = mysqli_query($con, $query);
     $name   = '';
     while ($r = mysqli_fetch_array($result)) {
         $name = $r['name'];
+        $dep=$r['department'];
     }
+    if($dep=="")
+	{
+		header("Location:index.php");
+	}
+	else
+	{
+
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -18,6 +27,7 @@ if (isset($_SESSION['teacher_code'])) {
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
 		<title>Welcome - <?php
     echo $name;
+
 ?></title>
 		<meta name="author" content="nitesh" />
 		<link rel="shortcut icon" href="img/<?php
@@ -32,6 +42,7 @@ if (isset($_SESSION['teacher_code'])) {
 		<![endif]-->
 	</head>
 	<body>
+	<a href="#"><i class="fa fa-fw fa-question-circle"></i></a>
 		<div class="container">
 			<div class="menu-wrap">
 				<nav class="menu">

@@ -73,6 +73,7 @@ $query="select * from `subject` where subject_code='$scode' ";
 					<thead>
 						<tr>
 							<th>Group</th>
+							<th>Send Message</th>
 							<th>T/L/P</th>
 						</tr>
 					</thead>
@@ -97,21 +98,27 @@ $query="select * from `subject` where subject_code='$scode' ";
 			else	
 			{
 				$group1="<a href='upload_group.php?group=$group&scode=$scode&tlp=$tlp'>$group</a>";
-			echo "<tr><td class='group'>$group1</td><td class='tlp'>$tlp</td></tr>";
+			echo "<tr><td class='group'>$group1</td><td><a href='#' onclick='message(\"$group\",\"$tlp\");' class='message'>Click here to send a message.</a></td><td class='tlp'>$tlp</td></tr>";
 			}
 		
 		}
 	if($lecgroup!='')
 	{
 	$lecgroup1=strtoupper("<a href='upload_lec.php?scode=$scode&tlp=L'>$lecgroup</a>");
-	echo "<tr><td class='group'>$lecgroup1</td><td class='tlp'>L</td></tr>";
+	echo "<tr><td class='group'>$lecgroup1</td><td><a href='#' onclick='message(\"$lecgroup\",\"L\");' class='message'>Click here to send a message.</a></td><td class='tlp'>L</td></tr>";
 	}
 						?>
 					</tbody>
 				</table>
 					</header>
 						<div id='message' style="position:relative; left:29%";><?php if(isset($_GET['msg'])) { echo $_GET['msg'];}?></div>
-       
+       <script type="text/javascript">
+       		function message(grp,tlp)
+       		{
+       			url="send-message.php?group="+grp+"&tlp="+tlp;
+       			window.open(url,'_blank','height=350,width=350');
+       		}
+       </script>>
 <div id="show_form" style="display: inline;">
 <form id="add_group" method="post" action="addgroup.php">
 	<input class='myButton' name="scode" id="scode" value='<?php echo $scode?>' type="text" hidden>
