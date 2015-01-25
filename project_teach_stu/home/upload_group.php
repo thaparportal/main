@@ -17,7 +17,7 @@ if (isset($_SESSION['teacher_code'])) {
         $result_sub = mysqli_query($con, $query);
         $r_sub      = mysqli_fetch_array($result_sub);
         $sname      = $r_sub[2];
-        $query      = "select * from `assignment_questions` where `teacher_code`='$tcode' and `group`='$group' and `tlp`='$tlp' ";
+        $query      = "SELECT * FROM `assignment_questions` WHERE `teacher_code`='$tcode' AND `group`='$group' AND `tlp`='$tlp' AND `subject-code`='$scode'";
         //echo $query;
         $result_ass = mysqli_query($con, $query);
         //echo $group.$scode.$tlp;
@@ -44,9 +44,29 @@ if (isset($_SESSION['teacher_code'])) {
 		<link rel="stylesheet" type="text/css" href="css/demo_table.css" />
 		<link rel="stylesheet" type="text/css" href="css/component_table.css" />
 		
-		<!--[if IE]>
-  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+		<?php
+			if(isset($_GET['msg']))
+			{
+				$msg=$_GET['msg'];
+				switch ($msg) {
+						case 1:
+							echo message1;
+							break;
+						case 2:
+							echo message2;
+							break;
+						case 3:
+							echo message3;
+							break;
+						case 4:
+							echo message4;
+							break;
+						default:
+							echo message6;
+							break;
+				}
+			}
+		?>
 	</head>
 	<body>
 		<div class="container">
@@ -97,9 +117,9 @@ if (isset($_SESSION['teacher_code'])) {
     $lecgroup = '';
     echo "<div class='table'>";
     while ($r = mysqli_fetch_array($result_ass)) {
-        $ass_name  = $r[4];
-        $timeg     = $r[6];
-        $times     = $r[7];
+        $ass_name  = $r['assignment_name'];
+        $timeg     = $r['time_given'];
+        $times     = $r['Last_date'];
         $see       = "See File";
         $url       = 'show_students.php';
         $url1      = 'showfile.php';
@@ -114,10 +134,8 @@ if (isset($_SESSION['teacher_code'])) {
 			
 					</header>
 			<div id='message' style="position:relative; left:29%";><?php
-    if (isset($_GET['msg'])) {
-        echo $_GET['msg'];
         //("Location:upload_group.php?group=$group&scode=$scode&tlp=$tlp");
-    }
+    
 ?></div>
 					<form action="upload_ass.php" method="post" enctype="multipart/form-data">
 						<input type=text name=tcode value=<?php

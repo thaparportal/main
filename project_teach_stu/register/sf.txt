@@ -7,3 +7,7 @@ INSERT INTO `teacher_info` (`teacher_number`, `name`, `teacher_code`, `mobile_no
 INSERT INTO `teacher_info` (`teacher_number`, `name`, `teacher_code`, `mobile_no`, `email`, `password`, `code`) VALUES (NULL,"Nitesh Singh","PBH","8288838038","abc@gmail.com","password","xn55xcv0bcoeqr0tfrgmlpt0lsg376")
 INSERT INTO `teacher_info` (`teacher_number`, `name`, `teacher_code`, `mobile_no`, `email`, `password`, `code`) VALUES (NULL,"Nitesh Singh","PBH","8288838038","abc@gmail.com","password","5323epbcmi1yvtzayloxlx4gebiv78")
 INSERT INTO `teacher_info` (`teacher_number`, `name`, `teacher_code`, `mobile_no`, `email`, `password`, `code`) VALUES (NULL,"Nitesh Singh","PBH","8288838035","abc@gmail.com","password","slmkdqjna43jjibtyozgbt78ghmei")
+INSERT INTO `teacher_info` (`teacher_number`, `name`, `teacher_code`, `mobile_no`, `email`, `password`, `code`) VALUES (NULL,"Nits","iuy","","tha@thapar.edu","1","yuhwljkb756ah0d3qa62zff3tya0c3")
+INSERT INTO `teacher_info` (`teacher_number`, `name`, `teacher_code`, `mobile_no`, `email`, `password`, `code`) VALUES (NULL,"Nits","iuy","","tha@thapar.edu","1","mcsizfxkga0xzj9i3jih6crq5yulli")
+INSERT INTO `teacher_info` (`teacher_number`, `name`, `teacher_code`, `mobile_no`, `email`, `password`, `code`) VALUES (NULL,"Nits","iuy","","thaghj@thapar.edu","1","v2w33bmnnfc4ev7hdxlrcrhicd4f1u")
+INSERT INTO `teacher_info` (`teacher_number`, `name`, `teacher_code`, `mobile_no`, `email`, `password`, `code`) VALUES (NULL,"Nits","iuyg","","thaghj@thapar.edu","1","mp8qfruiigq1d3hehnjgfq5wzicrnk")

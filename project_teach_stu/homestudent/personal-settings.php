@@ -48,8 +48,8 @@ if (isset($_SESSION['roll_number'])) {
     echo $name;
 ?></span></div>
 					<div class="link-list">
-						<a href="mystudents.php"><span>My Students</span></a>
-						<a href="mysubjects.php"><span>My Subjects</span></a>
+						<a href="home_student_subject.php"><span>My Subjects</span></a>
+						<a href="my_score.php"><span>My Score</span></a>
 						<a href="personal-settings.php"><span>Personal Settings</span></a>
 						<a href="security.php"><span>Security &amp; Privacy</span></a>
 					</div>

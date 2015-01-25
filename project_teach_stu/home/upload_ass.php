@@ -68,8 +68,10 @@ if (isset($_POST['submit'])) {
         $uploadOk = 0;
     }
     // Check file size
-    if ($_FILES["file"]["size"] > 20000000) {
-        $msg      = "Sorry, your file is too large.";
+    if ($_FILES["file"]["size"] > (8*2048*1024)) {
+        $msg      = 4;
+        header("Location:upload_group.php?group=$group&scode=$scode&tlp=$tlp&msg=$msg");
+        exit;
         $uploadOk = 0;
     }
     /* Allow certain file formats
@@ -80,7 +82,7 @@ if (isset($_POST['submit'])) {
     }*/
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
-        $msg = $msg . "Sorry, your file was not uploaded.";
+        $msg = 3;
         // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
@@ -90,9 +92,15 @@ if (isset($_POST['submit'])) {
             $query     = "INSERT INTO `assignment_questions`(`assignment_number`, `teacher_code`, `group`, `subject-code`, `assignment_name`, `tlp`, `time_given`, `Last_date`) VALUES (NULL,'$tcode1','$group','$scode','$assname','$tlp','$curr_time','$times')";
             include_once '../php/connect.php';
             echo $query;
-            $result = mysqli_query($con, $query);
+            if($result = mysqli_query($con, $query))
+                $msg=1;
+            else
+            {
+                $msg=2;
+                unlink($target_file);
+            }
         } else {
-            $msg = "Sorry, there was an error uploading your file.";
+            $msg = 2;
         }
     }
     //echo $msg;

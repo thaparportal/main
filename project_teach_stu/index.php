@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <?php
 session_start();
+ob_start();
 if(isset($_SESSION['teacher_code']))
 	header("Location:home/home_t.php");
 
-
 if(isset($_SESSION['roll_number']))
-	header("Location:homestudent/home_s.php");
+	header("Location:homestudent/");
+
 ?>
 <html>
 
@@ -249,35 +250,26 @@ else
 while($r=mysqli_fetch_array($result))
 {
 $password = $r[6];
-$verify=1;
-if($verify==1)
-{
+
 if((strcmp($password,$xpass))!=0) echo "<script> alert('WRONG PASSWORD ENTERED $password $xpass'); </script>"; 
 else
 {
 
 #$_SESSION['teacher_number']=$uid;
 $_SESSION['roll_number']=$xname;
-$_SESSION['group']=$r[4];
-header("Location:homestudent/home_s.php");
+    //print_r(array_keys($r));
+$_SESSION['group']=$r['group'];
+$_SESSION['verify']=$r['verify'];
+$_SESSION['year']=$r['year'];
+header("Location:homestudent");   
 }
-}
-else
-{
-echo "<script> alert('PLEASE VERIFY YOUR EMAIL ID'); </script>";
-}
+
 }
 }
 
 }
     
-    
-    
-    
-    
-    
-    
-    
+
 else
 {
 while($r=mysqli_fetch_array($result))
@@ -307,4 +299,5 @@ echo "<script> alert('PLEASE VERIFY YOUR EMAIL ID'); </script>";
 }
 }
 }
+ob_flush();
 ?>

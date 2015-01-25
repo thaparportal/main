@@ -46,12 +46,12 @@ $result=mysqli_query($con,$query);
 				<nav class="menu">
 					<div class="profile"><img height="40px" src="img/<?php echo $_SESSION['roll_number'].'.jpg';?>" alt="<?php echo $name;?>"/><span><?php echo $name;?></span></div>
 					<div class="link-list">
-						<a href="home_s.php"><span>Home Page</span></a>
+						<a href="../homestudent/"><span>Home Page</span></a>
 						<a href="personal-settings.php"><span>Personal Settings</span></a>
 						<a href="security.php"><span>Security &amp; Privacy</span></a>
 					</div>
 					<div class="icon-list">
-						<a href="home_s.php"><i class="fa fa-fw fa-home"></i></a>
+						<a href="../homestudent/"><i class="fa fa-fw fa-home"></i></a>
 						<a href="faq.php"><i class="fa fa-fw fa-question-circle"></i></a>
 						<a href="logout.php"><i class="fa fa-fw fa-power-off"></i></a></div>
 				</nav>
