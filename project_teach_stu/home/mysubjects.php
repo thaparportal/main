@@ -79,7 +79,7 @@ if (isset($_SESSION['teacher_code'])) {
     while ($r = mysqli_fetch_array($result)) {
         $url        = 'subject_groups.php';
         $tcode      = $r['teacher_code'];
-        $scode1     = $r['subject_code'];
+        $scode1     = strtolower($r['subject_code']);
         $query      = "select * from `subject` where subject_code='$scode1' ";
         $result_sub = mysqli_query($con, $query);
         $r_sub      = mysqli_fetch_array($result_sub);
@@ -149,5 +149,5 @@ if (isset($_SESSION['teacher_code'])) {
 </html>
 <?php
 } else
-    header("Location:/index.php");
+    header("Location:/project_teach_stu/");   
 ?>

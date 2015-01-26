@@ -2,5 +2,5 @@
 	session_start();
 	include_once 'connect.php';
 	session_destroy();
-	header("Location:../index.php");
+header("Location:/project_teach_stu/");
 ?>

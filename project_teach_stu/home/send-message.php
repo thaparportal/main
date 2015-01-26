@@ -12,9 +12,11 @@ if (isset($_SESSION['teacher_code'])) {
     if(isset($_GET['message']))
     {
     	$message=$_GET['message'];
-    	$group=$_GET['group'];
-    	$tlp=$_GET['tlp'];
-    	$query = "INSERT INTO `notifications` (`id`, `groups`, `tlp`, `message`, `time`) VALUES ('NULL', '$group', '$tlp', '$message', CURRENT_TIMESTAMP);";
+    	$group=strtolower($_GET['group']);
+    	$tlp=strtolower($_GET['tlp']);
+		if(isset($_GET['subject_code']))
+			$scode=strtolower($_GET['subject_code']);			
+    	$query = "INSERT INTO `notifications` (`id`, `groups`, `tlp`, `message`, `time`,`from`,`subject_code`) VALUES ('NULL', '$group', '$tlp', '$message', CURRENT_TIMESTAMP,'$tcode','');";
     	$result=mysqli_query($con,$query);
     	if($result)
     	{	//echo "SUCCESS";
@@ -37,7 +39,7 @@ if (isset($_SESSION['teacher_code'])) {
     		}
     	  	$msg="<script>alert(\"Your message has been succesfully posted\");window.close();</script>";
 			echo $msg;
-    	}
+    	}	
     	else
     	{	//echo "FAILURE";
     		$msg="<script>alert(\"Unable to post message. Please try again later.\");window.close();</script>";

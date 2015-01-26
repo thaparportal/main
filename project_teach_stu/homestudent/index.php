@@ -17,6 +17,7 @@ if (isset($_SESSION['roll_number'])) {
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
+		
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -31,11 +32,60 @@ if (isset($_SESSION['roll_number'])) {
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/menu_cornermorph.css" />
+		<link rel="stylesheet" type="text/css" href="css/normalize_table.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo_table.css" />
+		<link rel="stylesheet" type="text/css" href="css/component_table.css" />
+		<link rel="stylesheet" type="text/css" href="css/notify.css" />
+		<script type="text/javascript" src="../js/jquery.js"></script>
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
+		
 	</head>
 	<body>
+	<div id="black-out"></div>
+	<a href="#"><div class="notification-button"><i id="notification-toggle" class="fa fa-info-circle notifications"></i><span>Notification Toggle</span></div></a>
+	<div class="notifications-dialog">
+		<table>
+			<thead>
+				<tr>
+					<th>S.No.</th>
+					<th>Notifications</th>
+					<th>From</th>
+					<th>Subject</th>
+				</tr>
+			</thead>
+			<tbody id="notification-content">
+				<script type="text/javascript">
+				function fetchNotifications(Current_Time,Group)
+				{
+					$.post("fetch-notifications.php",{now:Current_Time,group:Group},function(data){
+						$("#notification-content").html(data);
+					});
+				}
+				</script>>
+			</tbody>
+		</table>
+		
+	</div>
+	<script type="text/javascript">
+		$(".notifications-dialog").hide();
+		$("#black-out").hide();
+		$(".notification-button").click(function(){
+			$(".notifications-dialog").fadeToggle(500);
+			<?php $ctime=strtotime("now");
+			$group=$_SESSION['group'];
+			echo "fetchNotifications('$ctime','$group');";
+			?>
+			$("#notification-toggle").toggleClass('fa-info-circle fa-times');
+			$("#black-out").fadeToggle(500);
+		});
+		$("#black-out").click(function(){
+			$(".notifications-dialog").fadeToggle(500);
+			$("#notification-toggle").toggleClass('fa-info-circle fa-times');
+			$("#black-out").fadeToggle(500);
+		});
+	</script>
 		<div class="container">
 			<div class="menu-wrap">
 				<nav class="menu">
@@ -76,9 +126,9 @@ if (isset($_SESSION['roll_number'])) {
 						<a href="logout.php" style="background: #c94e50; color: #fffce1;" ><span>Logout</span></a>
 						</nav>
 					</header>
-					
+							
 					<section class="related">
-						<p>Give your feedback at nitesh.ns19@gmail.com <span>Thank you for using this service</span></p>
+						<address>Give your feedback at nitesh.ns19@gmail.com <span>Thank you for using this service</span></address>
 					</section>
 				</div>
 			</div><!-- /content-wrap -->
@@ -89,5 +139,5 @@ if (isset($_SESSION['roll_number'])) {
 </html>
 <?php
 } else
-    header("Location:/index.php");
+    header("Location:/project_teach_stu/");
 ?>

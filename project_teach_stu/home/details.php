@@ -2,7 +2,7 @@
 include '../php/connect.php';
 if(isset($_POST['tcode']) && isset($_POST['department']))
 {
-	$dep=$_POST['department'];
+	$dep=strtolower($_POST['department']);
 	if($dep!='0')
 	{
 		$txt="<form id='sub' action='insert_subject.php'><b>Select Your Subjects</b><br><table border='0' style='text-align:left'>";

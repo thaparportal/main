@@ -137,5 +137,5 @@ $query="select * from `subject` where subject_code='$scode' ";
 <?php
 }
 else
-	header("Location:/index.php");
+    header("Location:/project_teach_stu/");   
 ?>

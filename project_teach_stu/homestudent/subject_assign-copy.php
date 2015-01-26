@@ -2,9 +2,12 @@
 session_start();
 include_once '../php/connect.php';
 if (isset($_SESSION['roll_number'])) {
+    
     $roll_number = $_SESSION['roll_number'];
-    $tlp=$_GET['tlp'];
-    $scode=$_GET['scode'];
+    if(isset($_GET['tlp']) and isset($_GET['scode']) and isset($_GET['tcode']) )
+    {
+    $tlp=strtolower($_GET['tlp']);
+    $scode=strtolower($_GET['scode']);
     $tcode=$_GET['tcode'];
     $purpose='';
     $query  = "select name from `teacher_info` where teacher_code='$tcode'";
@@ -213,6 +216,11 @@ if (isset($_SESSION['roll_number'])) {
 	</body>
 </html>
 <?php
-} else
-    header("Location:/index.php");
+}
+else
+{
+ header("Location:/project_teach_stu/homestudent/");   
+}
+}else
+header("Location:/project_teach_stu/");
 ?>

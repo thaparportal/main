@@ -81,5 +81,5 @@ if (isset($_SESSION['teacher_code'])) {
 </html>
 <?php
 } else
-    header("Location:/index.php");
+    header("Location:/project_teach_stu/");   
 ?>

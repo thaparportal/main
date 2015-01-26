@@ -6,7 +6,7 @@ if(isset($_SESSION['teacher_code']))
         $group=strtolower($_GET['group']);
         $tlp=strtolower($_GET['tlp']);
         $scode=$_GET['scode'];
-        $assno=$_GET['assno'];
+        $assname=$_GET['assno'];
 		$tcode=$_SESSION['teacher_code'];
 		$query="select name from `teacher_info` where teacher_code='$tcode'";
 		$result=mysqli_query($con,$query);
@@ -96,18 +96,20 @@ while($r=mysqli_fetch_array($result_sub))
   
     while($r2=mysqli_fetch_array($result_s))
     $st_name=$r2['name'];
-       
-    
-    $quer4="select * from `assignment_solutions` where `roll_number`=$roll_number and `assignment_number`=$assno order by roll_number";
-    
-    
+ 
+$qu="SELECT `assignment_number` FROM `assignment_questions` WHERE `teacher_code`='$tcode' AND `group`='$group' AND `subject-code`='$scode' AND `assignment_name`='$assname' AND `tlp`='$tlp' LIMIT 1";
+ $result11=mysqli_query($con,$qu);      
+    $rowss=mysqli_fetch_array($result11);
+      $assno=$rowss['assignment_number'];
+$quer4="select * from `assignment_solutions` where `roll_number`=$roll_number and `assignment_number`=$assno order by `roll_number`,`time_uploaded` limit 1";
+	
+//echo $quer4;    
+ $sol="<a target='_blank' href='showfiles.php?group=$group&scode=$scode&tlp=$tlp&tcode=$tcode&assname=$assname&roll_number=$roll_number'>Solution</a>";
  $result_s4=mysqli_query($con,$quer4);
   while($r4=mysqli_fetch_array($result_s4))
-    $tim=$r4['time_uploaded'];
-       
-    
-echo "<tr><td class='rollnumber'>$roll_number</td><td class='rollnumber'>$st_name</td><td class='rollnumber'>$group</td><td class='rollnumber'>$tim</td>";
-                
+  {$tim=$r4['time_uploaded'];
+     echo "<tr><td class='rollnumber'>$roll_number</td><td class='name'>$st_name</td><td class='group'>$group</td><td class='time'>$tim</td><td class='solution'>$sol</td>";
+  }
         }
     }
     else

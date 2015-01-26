@@ -9,7 +9,7 @@ if (isset($_SESSION['roll_number'])) {
     while ($r = mysqli_fetch_array($result)) {
         $name = $r['name'];
         
-         $group = $r['group'];
+         $group = strtolower($r['group']);
     }
    
     ?>
@@ -146,5 +146,5 @@ if (isset($_SESSION['roll_number'])) {
 </html>
 <?php
 } else
-    header("Location:/index.php");
+header("Location:/project_teach_stu/");
 ?>

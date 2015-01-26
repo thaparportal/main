@@ -10,8 +10,8 @@ if (isset($_SESSION['teacher_code'])) {
         $name = $r['name'];
     }
     if (isset($_GET['SCODE'])) {
-        $scode      = $_GET['SCODE'];
-        $tlp        = $_GET['TLP'];
+        $scode      = strtolower($_GET['SCODE']);
+        $tlp        = strtolower($_GET['TLP']);
         $query      = "select * from `subject` where subject_code='$scode' ";
         $result_sub = mysqli_query($con, $query);
         $r_sub      = mysqli_fetch_array($result_sub);
@@ -42,7 +42,29 @@ if (isset($_SESSION['teacher_code'])) {
         <link rel="stylesheet" type="text/css" href="css/normalize_table.css" />
         <link rel="stylesheet" type="text/css" href="css/demo_table.css" />
         <link rel="stylesheet" type="text/css" href="css/component_table.css" />
-        
+		<?php
+			if(isset($_GET['msg']))
+			{
+				$msg=$_GET['msg'];
+				switch ($msg) {
+						case 1:
+							echo message1;
+							break;
+						case 2:
+							echo message2;
+							break;
+						case 3:
+							echo message3;
+							break;
+						case 4:
+							echo message4;
+							break;
+						default:
+							echo message6;
+							break;
+				}
+			}
+		?>        
         <!--[if IE]>
           <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -107,10 +129,6 @@ if (isset($_SESSION['teacher_code'])) {
             
                     </header>
             <div id='message' style="position:relative; left:29%";><?php
-    if (isset($_GET['msg'])) {
-        echo $_GET['msg'];
-        //("Location:upload_group.php?group=$group&scode=$scode&tlp=$tlp");
-    }
 ?></div>
                     <form action="upload_sld.php" method="post" enctype="multipart/form-data">
                         <input type=text name=tcode value=<?php
@@ -160,5 +178,5 @@ if (isset($_SESSION['teacher_code'])) {
 </html>
 <?php
 } else
-    header("Location:/index.php");
+    header("Location:/project_teach_stu/");   
 ?>

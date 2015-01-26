@@ -1,13 +1,13 @@
 <?php
 session_start();
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) and isset($_POST['tcode']) and isset($_POST['group']) and isset($_POST['tlp']) and isset($_POST['times']) and isset($_POST['assname']) and isset($_POST['scode']) and  isset($_FILES['file']['name'])) {
     include_once '../php/connect.php';
     $roll=$_SESSION['roll_number'];
 	$tcode    = $_POST['tcode'];
     $tcode1   = $tcode;
-    $group    = $_POST['group'];
-    $scode    = $_POST['scode'];
-    $tlp      = $_POST['tlp'];
+    $group    = strtolower($_POST['group']);
+    $scode    = strtolower($_POST['scode']);
+    $tlp      = strtolower($_POST['tlp']);
     $times    = $_POST['times'];
     $assname  = $_POST['assname'];
     $fileName = $_FILES['file']['name'];
@@ -17,11 +17,10 @@ if (isset($_POST['submit'])) {
     $result   = mysqli_query($con, $query);
     $r        = mysqli_fetch_array($result);
     $code     = $r[0];
-    echo $code;
-    $sol       = $roll.'_'.$assname.'_'.$code ;
+    $sol       = $assname;
     $rootdir     = "solutions";
     $target_dir  = "$rootdir/$scode/$group/$tlp/$sol/";
-    $target_file = $target_dir . $assname . '.' . $info[1];
+    $target_file = $target_dir . $roll .'_'.substr($code, 0,3). '.' . $info[1];
     if (file_exists('solutions')) {
         if (file_exists("$rootdir/$scode")) {
             if (file_exists("$rootdir/$scode/$group")) {
@@ -68,10 +67,10 @@ if (isset($_POST['submit'])) {
     if (file_exists($target_file)) {
         //$msg      = "Sorry, file already exists.";
         //$uploadOk = 0;
-        $target_file = $target_dir . $assname . mt_rand(0,1000).'.' . $info[1];
+        $target_file = $target_dir .$roll .'_'.substr($code, 0,3). mt_rand(0,1000).'.' . $info[1];
     }
     // Check file size
-    if ($_FILES["file"]["size"] > (2048*1024)) {
+    if ($_FILES["file"]["size"] > (8*2048*1024)) {
         $msg      = 4;
         $uploadOk = 0;
         echo $msg;
@@ -111,7 +110,7 @@ if (isset($_POST['submit'])) {
             if($limit2>0)
             {
                 $msg=5;
-                //header("Location:subject_assign.php?tcode=$tcode1&scode=$scode&tlp=$tlp&msg=$msg&missed=$limit2");
+                header("Location:subject_assign.php?tcode=$tcode1&scode=$scode&tlp=$tlp&msg=$msg&missed=$limit2");
                 exit;
             }
             $query     = "INSERT INTO `assignment_solutions`(`solution_number`, `assignment_number`, `roll_number`) VALUES (NULL,".$row['assignment_number'].",'$roll')";

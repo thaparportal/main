@@ -1,0 +1,44 @@
+.notification-button {
+	position: fixed;
+	left:75%;
+	z-index: 1000;
+	margin: 1em;
+	padding: 0;
+	width: 2.5em;
+	height: 2.25em;
+	border: none;
+	font-size: 2.5em;
+	color: #373a47;
+	background: transparent;
+	background-color: #b4bad2;
+}
+.notification-button span {
+	display: none;
+}
+
+.notification-button:hover {
+	opacity: 0.6;
+}
+#notification-toggle{
+	vertical-align: 20px;
+}
+.notifications-dialog
+{
+	position:fixed;
+	margin-left:35%;
+	margin-right: 40%;
+	z-index: 1000;
+}
+table tbody tr td
+{
+	height:1px;
+	padding: 8px;
+	word-wrap: break-word;
+}
+#black-out{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	background-color: rgba(20,20,20,0.4);
+}

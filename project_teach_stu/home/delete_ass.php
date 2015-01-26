@@ -3,9 +3,9 @@ if (isset($_POST['submit'])) {
     include_once '../php/connect.php';
     $tcode      = $_POST['tcode'];
     $tcode1     = $tcode;
-    $group      = $_POST['group'];
-    $scode      = $_POST['scode'];
-    $tlp        = $_POST['tlp'];
+    $group      = strtolower($_POST['group']);
+    $scode      = strtolower($_POST['scode']);
+    $tlp        = strtolower($_POST['tlp']);
     $assname    = $_POST['assname'];
     $query      = "select code from `teacher_info` where teacher_code='$tcode'";
     $result     = mysqli_query($con, $query);

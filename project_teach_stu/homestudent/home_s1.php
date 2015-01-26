@@ -86,7 +86,7 @@ include_once '../php/functions.php';
 						<?php
     while ($r = mysqli_fetch_array($result)) {
         
-        $scode1     = $r['subject_code'];
+        $scode1     = strtolower($r['subject_code']);
         $query      = "select * from `subject` where subject_code='$scode1' ";
         $result_sub = mysqli_query($con, $query);
         $r_sub      = mysqli_fetch_array($result_sub);

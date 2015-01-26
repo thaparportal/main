@@ -15,7 +15,7 @@ if(isset($_SESSION['teacher_code']))
 		$query="select * from `teacher_subject` where teacher_code='$tcode' group by `subject_code`  ";
 		$result=mysqli_query($con,$query);
 if(isset($_GET['scode']))
-	$scode=$_GET['scode'];
+	$scode=strtolower($_GET['scode']);
 $query="select * from `teacher_subject` where teacher_code='$tcode' and subject_code='$scode' order by `tlp`";
 //echo $query;
 	$result=mysqli_query($con,$query);
@@ -163,5 +163,5 @@ $query="select * from `subject` where subject_code='$scode' ";
 <?php
 }
 else
-	header("Location:/index.php");
+    header("Location:/project_teach_stu/");   
 ?>

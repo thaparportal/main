@@ -3,9 +3,9 @@ if (isset($_POST['submit'])) {
     include_once '../php/connect.php';
     $tcode    = $_POST['tcode'];
     $tcode1   = $tcode;
-    $group    = $_POST['group'];
-    $scode    = $_POST['scode'];
-    $tlp      = $_POST['tlp'];
+    $group    = strtolower($_POST['group']);
+    $scode    = strtolower($_POST['scode']);
+    $tlp      = strtolower($_POST['tlp']);
     $times    = $_POST['times'];
     $assname  = $_POST['assname'];
     $fileName = $_FILES['file']['name'];
@@ -91,9 +91,16 @@ if (isset($_POST['submit'])) {
             $curr_time = date('Y-m-d h:i:s', $tm);
             $query     = "INSERT INTO `assignment_questions`(`assignment_number`, `teacher_code`, `group`, `subject-code`, `assignment_name`, `tlp`, `time_given`, `Last_date`) VALUES (NULL,'$tcode1','$group','$scode','$assname','$tlp','$curr_time','$times')";
             include_once '../php/connect.php';
-            echo $query;
+            //echo $query;
             if($result = mysqli_query($con, $query))
-                $msg=1;
+            {
+                $note="New assignment to be submitted by $times";
+                $query = "INSERT INTO `notifications` (`id`, `groups`, `tlp`, `message`, `time`,`from`,`subject_code`) VALUES ('NULL', '$group', '$tlp', '$note', CURRENT_TIMESTAMP,'$tcode1','$scode');";
+                if($result = mysqli_query($con, $query))
+                {
+                    $msg=1;
+                }
+            }
             else
             {
                 $msg=2;

@@ -15,8 +15,10 @@ if(isset($_SESSION['roll_number']))
 
   <meta charset="UTF-8">
 <link rel="shortcut icon" href="favicon.jpg">
-
-  <title>Thapar Portal</title>
+<link rel="stylesheet" type="text/css" href="css/anormalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/ademo.css" />
+		<link rel="stylesheet" type="text/css" href="css/acomponent.css" />
+	  <title>Thapar Portal</title>
 
     <style>
 @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
@@ -43,7 +45,7 @@ body{
 	background-image: url('img/back.jpg');
 	background-size: cover;
 	-webkit-filter: blur(5px);
-	z-index: 0;
+	z-index: -1;
 }
 
 .grad{

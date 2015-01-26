@@ -3,9 +3,9 @@ session_start();
 include_once '../php/connect.php';
 if(isset($_SESSION['teacher_code']))
 {
-        $group=$_GET['group'];
-        $tlp=$_GET['tlp'];
-        $scode=$_GET['scode'];
+        $group=strtolower($_GET['group']);
+        $tlp=strtolower($_GET['tlp']);
+        $scode=($_GET['scode']);
 		$tcode=$_SESSION['teacher_code'];
 		$query="select name from `teacher_info` where teacher_code='$tcode'";
 		$result=mysqli_query($con,$query);
@@ -159,5 +159,5 @@ echo "<tr><td class='rollnumber'>$roll_number</td><td class='rollnumber'>$st_nam
 <?php
 }
 else
-	header("Location:/index.php");
+    header("Location:/project_teach_stu/");   
 ?>

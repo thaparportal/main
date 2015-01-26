@@ -5,9 +5,9 @@ if (isset($_GET['group'])) {
     include_once '../php/functions.php';
     $tcode      = $_SESSION['teacher_code'];
     $tcode1     = $tcode;
-    $group      = $_GET['group'];
-    $scode      = $_GET['scode'];
-    $tlp        = $_GET['tlp'];
+    $group      = strtolower($_GET['group']);
+    $scode      = strtolower($_GET['scode']);
+    $tlp        = strtolower($_GET['tlp']);
     $assname    = $_GET['assno'];
     $flag       = 0;
     $query      = "select code from `teacher_info` where teacher_code='$tcode'";
@@ -40,5 +40,5 @@ if (isset($_GET['group'])) {
         exit;
     }
 }
-//header("Location:upload_group.php?group=$group&scode=$scode&tlp=$tlp&msg=$msg");
+header("Location:upload_group.php?group=$group&scode=$scode&tlp=$tlp&msg=$msg");
 ?>

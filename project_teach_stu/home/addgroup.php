@@ -2,12 +2,12 @@
 session_start();
 include_once '../php/connect.php';
 if (isset($_POST['group'])) {
-    $group = $_POST['group'];
+    $group = strtolower($_POST['group']);
     $tcode = $_SESSION['teacher_code'];
-    $scode = $_POST['scode'];
+    $scode = strtolower($_POST['scode']);
     $tlp   = '';
     if (isset($_POST['tlp']))
-        $tlp = $_POST['tlp'];
+        $tlp = strtolower($_POST['tlp']);
     $query  = "select * from `teacher_subject` where `teacher_code`='$tcode' and subject_code='$scode'";
     $result = mysqli_query($con, $query);
     $query  = "INSERT INTO `teacher_subject`(`sno`, `teacher_code`, `subject_code`, `group`, `tlp`) VALUES (null,'$tcode','$scode','$group','$tlp')";

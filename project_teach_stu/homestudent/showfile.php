@@ -3,7 +3,16 @@ session_start();
 if (isset($_GET['scode'])) {
     include_once '../php/connect.php';
     include_once '../php/functions.php';
+	if(isset( $_SESSION['roll_number']))
     $rno      = $_SESSION['roll_number'];
+	else
+    
+        if(isset($_GET['rno']))
+    {
+             $rno=$_GET['rno'];
+    }
+    if (isset($_GET['scode']) and isset($_GET['tlp']) and isset($_GET['tcode'] ) )
+    {
     $scode      = $_GET['scode'];
     $tlp        = $_GET['tlp'];
 	$tcode=$_GET['tcode'];
@@ -58,7 +67,7 @@ if (isset($_GET['scode'])) {
     $files1     = scandir($target_dir);
     //echo $target_dir;
     $tempdir    = "Temp/";
-    $name       = random_code(10);
+    $name       = random_code(10).'_'.$rno;
     for ($x = 2; $x < count($files1); $x++) {
         //$files1[$x]=$dir.$files1[$x];
         $info        = explode('.', $files1[$x], 2);
@@ -80,8 +89,19 @@ if (isset($_GET['scode'])) {
 		else{
 		$msg='assignment not found';
 		}
-		header("Location:subject_assign.php?scode=$scode&tlp=$tlp&tcode=$tcode&msg=$msg");
+		header("Location:subject_assign.php?scode=$scode&tlp=$tlp&tcode=$tcode&msg=$msg");exit;
 	}
+
+header("Location:upload_group.php?group=$group&scode=$scode&tlp=$tlp&msg=$msg");
+    }
+else
+{
+   header("Location:/project_teach_stu/homestudent/");
 }
-//header("Location:upload_group.php?group=$group&scode=$scode&tlp=$tlp&msg=$msg");
+}
+else
+{
+    echo 'f';
+ header("Location:/project_teach_stu/homestudent/");
+}
 ?>

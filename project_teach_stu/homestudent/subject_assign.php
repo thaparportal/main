@@ -1,10 +1,13 @@
 <?php
 session_start();
 include_once '../php/connect.php';
-if (isset($_SESSION['roll_number'])) {
+if (isset($_SESSION['roll_number']))
+{
+    if(isset($_GET['tlp']) and isset($_GET['scode']) and isset($_GET['tcode'])) {
+        
     $roll_number = $_SESSION['roll_number'];
-    $tlp=$_GET['tlp'];
-    $scode=$_GET['scode'];
+    $tlp=strtolower($_GET['tlp']);
+    $scode=strtolower($_GET['scode']);
     $tcode=$_GET['tcode'];
     $purpose='';
     $query  = "select name from `teacher_info` where teacher_code='$tcode'";
@@ -33,7 +36,7 @@ if (isset($_SESSION['roll_number'])) {
     $name        = '';
     while ($r = mysqli_fetch_array($result)) {
         $name = $r['name']; 
-		$group = $r['group'];
+		$group = strtolower($r['group']);
     }
     
     $query   = "select subject_name from `subject` where `subject_code`='$scode' ";
@@ -251,6 +254,12 @@ if (isset($_SESSION['roll_number'])) {
 	</body>
 </html>
 <?php
+    }
+    else
+    {
+        header("Location:/project_teach_stu/homestudent/");
+    }
 } else
-    header("Location:/index.php");
+  header("Location:/project_teach_stu/");
+
 ?>

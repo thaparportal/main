@@ -10,9 +10,9 @@ if (isset($_SESSION['teacher_code'])) {
         $name = $r['name'];
     }
     if (isset($_GET['group'])) {
-        $group      = $_GET['group'];
-        $scode      = $_GET['scode'];
-        $tlp        = $_GET['tlp'];
+        $group      = strtolower($_GET['group']);
+        $scode      = strtolower($_GET['scode']);
+        $tlp        = strtolower($_GET['tlp']);
         $query      = "select * from `subject` where subject_code='$scode' ";
         $result_sub = mysqli_query($con, $query);
         $r_sub      = mysqli_fetch_array($result_sub);
@@ -198,5 +198,5 @@ if (isset($_SESSION['teacher_code'])) {
 </html>
 <?php
 } else
-    header("Location:/index.php");
+    header("Location:/project_teach_stu/");   
 ?>

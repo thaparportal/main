@@ -2,7 +2,7 @@
 session_start();
 include_once '../php/connect.php';
 if (isset($_POST['scode'])) {
-    $scode = $_POST['scode'];
+    $scode = strtolower($_POST['scode']);
     $tcode = $_SESSION['teacher_code'];
     //$sname = '';
     if (isset($_POST['sname']))
