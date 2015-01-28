@@ -74,6 +74,7 @@ $query="select * from `subject` where subject_code='$scode' ";
 							<th>Student Name</th>
 							<th>Group</th>
 							<th>Score</th>
+							<th>Name</th>
                             
 						</tr>
 					</thead>
@@ -88,18 +89,35 @@ while($r=mysqli_fetch_array($result_sub))
 		{			
             $roll_number=$r['roll_number'];
     $qu="select * from `student_info` where `roll_number`=$roll_number";
- $result_s=mysqli_query($con,$qu);
-  
+	$result_s=mysqli_query($con,$qu);
+ 	$r2=mysqli_fetch_array($result_s);
+ 	$st_name=$r2['name'];
+	$qu="select count(distinct `assignment_number`) from `assignment_solutions` where `roll_number`=$roll_number ";
+ 	$result_s=mysqli_query($con,$qu);
+    $r2=mysqli_fetch_array($result_s);
+ 	$score=$r2[0];
+	$qu="select distinct `assignment_number` from `assignment_solutions` where `roll_number`=$roll_number ";
+ 	$result_s=mysqli_query($con,$qu);
+    $r2=mysqli_fetch_array($result_s);
+	$qu="select `assignment_name` from `assignment_questions` where `assignment_number`=$r2[0] ";
+	//echo $qu;
+ 	$result_n=mysqli_query($con,$qu);
+    $r3=mysqli_fetch_array($result_n);
+	$solve_ass=$r3[0];
     while($r2=mysqli_fetch_array($result_s))
-    $st_name=$r2['name'];
-          
-    
-echo "<tr><td class='rollnumber'>$roll_number</td><td class='rollnumber'>$st_name</td><td class='rollnumber'>$group</td>";
+	{
+		$qu="select `assignment_name` from `assignment_questions` where `assignment_number`=$r2[0] ";
+	 	$result_n=mysqli_query($con,$qu);
+		$r3=mysqli_fetch_array($result_n);
+		$solve_ass=$solve_ass.','.$r3[0];
+	}
+echo "<tr><td class='rollnumber'>$roll_number</td><td class='rollnumber'>$st_name</td><td class='rollnumber'>$group</td><td class='score'>$score</td><td class='score'>$solve_ass</td>";
                 
         }
     }
     else
     {
+		
         $lgroup=explode(",",$group);
         foreach($lgroup as $r1)
         { 
@@ -111,12 +129,17 @@ echo "<tr><td class='rollnumber'>$roll_number</td><td class='rollnumber'>$st_nam
 		{
 			$roll_number = $r['roll_number'];
           
-           $qu="select * from `student_info` where `roll_number`=$roll_number";    
- $result_s=mysqli_query($con,$qu);
-          while($r2=mysqli_fetch_array($result_s))
-    $st_name=$r2['name'];
+           	$qu="select * from `student_info` where `roll_number`=$roll_number";    
+ 			$result_s=mysqli_query($con,$qu);
+		  	$r2=mysqli_fetch_array($result_s);
+    		$st_name=$r2['name'];
+		  	$qu="select count(distinct `assignment_number`) from `assignment_solutions` where `roll_number`=$roll_number ";
+	//echo $qu;
+ 			$result_s=mysqli_query($con,$qu);
+    		$r2=mysqli_fetch_array($result_s);
+ 			$score=$r2[0];
           
-		echo  "<tr><td class='rollnumber'>$roll_number</td><td class='rollnumber'>$st_name</td><td class='rollnumber'>$r1</td>";
+		echo  "<tr><td class='rollnumber'>$roll_number</td><td class='rollnumber'>$st_name</td><td class='rollnumber'>$r1</td><td class='score'>$score</td>";
 		$st_name="";
       
  }  

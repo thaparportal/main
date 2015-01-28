@@ -105,7 +105,7 @@ if (isset($_SESSION['roll_number'])) {
         $tname   = $r1['name'];
       //   echo $query.'<br>;';
         $query   = "select tlp from `teacher_subject` where `teacher_code`='$tcode' and `subject_code`='$scode' and `group`='$group'";
-    echo $query;
+  //  echo $query;
         $res1     = mysqli_query($con, $query);
         while ($r1 = mysqli_fetch_array($res1)) {
 

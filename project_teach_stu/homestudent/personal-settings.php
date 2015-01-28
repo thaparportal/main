@@ -71,57 +71,47 @@ if (isset($_SESSION['roll_number'])) {
     $query  = "select * from `student_info` where roll_number='$rollno'";
     $result = mysqli_query($con, $query);
     echo "<form action=# method=post class='per_form' autocomplete='off' onsubmit=\"return confirm('Are You sure you want to update data');\" >";
-    while ($r = mysqli_fetch_array($result)) {
-        $i = 1;
-        echo "<input type=text name=new$i value='$r[$i]' width=200px ></input>'<br>";
-        $i = $i + 1;
-        //	echo "<input type=text name=new7 value=$rbranch></input>'<br>";
-        //	echo "<input type=password name=new6 value=$r[6]></input>'<br>";
-        //	echo "<input type=submit class=submit value=update >";
-    }
+    $r = mysqli_fetch_array($result);
+        $gp=$r['group'];
+		$branch=$r['branch'];
+		$pass=$r['group'];
+		$year=$r['year'];
+		$email=$r['email'];
+			
+        echo "<h2>Group</h2><input type=text name=group value='$gp' width=200px ></input>'<br>";
+        echo "<h2>Branch</h2><input type=text name=branch value=$branch></input>'<br>";
+        echo "<h2>email</h2><input type=password name=email value=$email></input>'<br>";
+		echo "<h2>Year</h2><input type=text name=year value=$year></input>'<br>";
+		echo "<input type=submit class=submit value=update >";
+    
     echo "</form>";
     $r    = mysqli_fetch_array($result);
     $flag = 0;
-    if (isset($_POST['new1']) && $_POST['new1'] != $r[1]) {
-        $new_val = $_POST['new1'];
-        $query   = "UPDATE `student_info` SET `Name`= '$new_val' where roll_number='$rollno'";
+    if (isset($_POST['group']) && $_POST['group'] != $r['group']) {
+        $new_val = $_POST['group'];
+        $query   = "UPDATE `student_info` SET `group`= '$new_val' where roll_number='$rollno'";
         $result  = mysqli_query($con, $query);
         $flag    = 1;
     }
-    if (isset($_POST['new5']) && $_POST['new5'] != $r[5]) {
-        $new_val = $_POST['new5'];
-        $query   = "UPDATE `student_info` SET `password`= '$new_val' where roll_number='$rollno'";
+    if (isset($_POST['branch']) && $_POST['branch'] != $r['branch']) {
+        $new_val = $_POST['branch'];
+        $query   = "UPDATE `student_info` SET `branch`= '$new_val' where roll_number='$rollno'";
         $result  = mysqli_query($con, $query);
         $flag    = 1;
     }
-    if (isset($_POST['new2']) && $_POST['new2'] != $r[2]) {
-        $new_val = $_POST['new2'];
+    if (isset($_POST['email'])&& $_POST['email'] != $r['email']) {
+        $new_val = $_POST['email'];
         $query   = "UPDATE `student_info` SET `email`= '$new_val' where roll_number='$rollno'";
         $result  = mysqli_query($con, $query);
         $flag    = 1;
     }
-    if (isset($_POST['new3']) && $_POST['new3'] != $r[3]) {
-        $new_val = $_POST['new3'];
-        $query   = "UPDATE `student_info` SET `mobile_no`=$new_val where roll_number='$rollno'";
+    if (isset($_POST['year']) && $_POST['year'] != $r['year']) {
+        $new_val = $_POST['year'];
+        $query   = "UPDATE `student_info` SET `year`=$new_val where roll_number='$rollno'";
         $result  = mysqli_query($con, $query);
         $flag    = 1;
     }
-    if (isset($_POST['new4']) && $_POST['new4'] != $r[4]) {
-        $new_val                 = $_POST['new4'];
-        $query                   = "UPDATE `student_info` SET `roll_number`= '$new_val' where roll_number='$rollno'";
-        $result                  = mysqli_query($con, $query);
-        $query                   = "UPDATE `teacher_subject` SET `roll_number`= '$new_val' where roll_number='$rollno'";
-        $result                  = mysqli_query($con, $query);
-        $query                   = "UPDATE `assignment_questions` SET `roll_number`= '$new_val' where roll_number='$rollno'";
-        $result                  = mysqli_query($con, $query);
-        $_SESSION['roll_number'] = $new_val;
-        rename("img/$rollno.jpg", "img/$new_val.jpg");
-        if ($rollno != $new_val) {
-            unlink("img/$rollno.jpg");
-            $rollno = $new_val;
-        }
-        $flag = 1;
-    }
+   
     if ($flag == 1) {
         $flag = 0;
         echo "<script>alert('Successfully Updated')</script>";

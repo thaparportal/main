@@ -68,7 +68,9 @@ $query="select * from `subject` where subject_code='$scode' ";
 <header class="c-header">
 						
 						<h1>Submission List of Students<span><?php echo strtoupper($scode); echo "   ";echo $sname; echo "  ".strtoupper($tlp);?></span></h1>
-						<table>
+			<h3><a href=<?php echo "'downzip.php?tlp=$tlp&group=$group&scode=$scode&assname=$assname'" ;?>>Download Zip</a></h3>
+			
+					<table>
 					<thead>
 						<tr>
 							<th>Roll Number</th>
